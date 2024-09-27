@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comic Collection</title>
+    <style>
+        body{
+            background-color: #000000;
+        }
+        header .logo img{
+            height: 100px;
+            width: 120px;
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+        header .flex-container{
+            display: flex;
+            flex-direction: row;
+        }
+        header ul {
+            display: flex;
+            flex-direction: row;
+            /*margin: 50px auto 0 auto; */
+            justify-content: center;
+            margin-left: 400px;
+            margin-top: 70px;
+        }
+        header ul li {
+            color: aqua;
+            padding-left: 50px;
+        }
+        .comic-collection  .con{
+            display: flex;
+            flex-direction: row;
+            margin-left: 220px;
+        }
+        .comic-collection .con .cover{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+       }
+       .comic-collection .con .cover img{
+        height: 250px;
+        width: 200px;
+        border-radius: 21px;
+        padding: 30px;
+        position: relative;
+        z-index: 2;
+       }
+       .comic-collection .con .cover h1{
+        font-size: 18px;
+        color: #BFFCF9;
+        margin-top: -10px;
+        position: relative;
+        z-index: 2;
+
+       }
+       .comic-collection .con .cover p{
+        font-size: 14px;
+        color: #fa0707;
+        margin-top: -10px;
+        position: relative;
+        z-index: 2;
+
+       }
+       .comic-collection .con .cover .card{
+        display: none;
+        border: 3px solid white;
+        background-color: white;
+        width: 300px;
+        height: 200px;
+        margin-top: -100px;
+        border-radius: 21px;
+        position: relative;
+        z-index: 1;
+       }
+
+    
+       .comic-collection .con .cover img:hover + .card {
+        display: block;
+    }
+
+       .comic-collection .con .cover .card p{
+        padding-top: 100px;
+        padding-left: 40px;
+        padding-right: 30px;
+        font-size: 11px;
+        color: #000000;
+       }
+        .comic-collection {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="flex-container">
+        <div class="logo">
+            <img src="logo.svg" >
+        </div>
+        <ul>
+            <a href="home"><li>HOME</li></a>
+            <a href="comic.html"><li>COMIC</li></a>
+            <li>CONTACT</li>
+        </ul>
+    </div>
+       </header>
+
+    <h2 id="comicTitle"></h2>
+
+    
+    <div id="batman" class="comic-collection">
+        <div class="con">
+        <div class="cover">
+            <img src="batman.jpg" alt="">
+            <h1>Batman: Year One</h1>
+            <p>Frank Miller & David Mazzucchelli</p>
+            <button class="buy-now">BUY NOW</button>
+            <div class="card">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Optio doloribus perspiciatis, delectus 
+                     laboriosam quam, sit voluptatibus ut,</p>
+            </div>
+        </div>
+
+        <div class="cover">
+            <img src="bk joker.png" alt="">
+            <h1>Batman: The Killing Joker</h1>
+            <p>Alan Moore & Brian Bolland</p>
+            <button class="buy-now">BUY NOW</button>
+            <div class="card">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Optio doloribus perspiciatis, delectus 
+                     laboriosam quam, sit voluptatibus ut,</p>
+            </div>
+        </div>
+        <div class="cover">
+            <img src="dark knight.jpg" alt="">
+            <h1>Batman: The Dark Knight Returns</h1>
+            <p>Frank Miller</p>
+            <div class="card">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Optio doloribus perspiciatis, delectus 
+                     laboriosam quam, sit voluptatibus ut,</p>
+            </div>
+        </div>
+        <div class="cover">
+            <img src="batman.jpg" alt="">
+            <h1>Batman: The Killing Joker</h1>
+            <p>Alan Moore</p>
+            <div class="card">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Optio doloribus perspiciatis, delectus 
+                     laboriosam quam, sit voluptatibus ut,</p>
+            </div>
+        </div>
+        </div>
+       
+
+    
+
+    <script>
+        // Function to get query parameters from URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Get the selected product from the URL
+        const selectedProduct = getQueryParam('product');
+        const comicTitle = document.getElementById('comicTitle');
+        const collections = document.querySelectorAll('.comic-collection');
+
+        // Show the relevant comic collection
+        if (selectedProduct) {
+            comicTitle.innerText = selectedProduct.charAt(0).toUpperCase() + selectedProduct.slice(1) + " Comics"; // Capitalize the first letter
+            collections.forEach(collection => {
+                if (collection.id === selectedProduct) {
+                    collection.classList.add('active');
+                }
+            });
+        } else {
+            comicTitle.innerText = "No Product Selected";
+        }
+
+
+        // hover effect:
+        document.querySelectorAll('.comic-collection .con .cover img').forEach(img => {
+            img.addEventListener('mouseover', function() {
+                const card = this.nextElementSibling;
+                if (card && card.classList.contains('card')) {
+                    card.style.display = 'block';
+                }
+            });
+        
+            img.addEventListener('mouseout', function() {
+                const card = this.nextElementSibling;
+                if (card && card.classList.contains('card')) {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
